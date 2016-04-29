@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import TextInput from './TextInput';
 
@@ -9,17 +10,31 @@ export default class TodoItem extends Component {
   }
   
   render() {
+    var itemClass = classNames({
+      'todo': true,
+      'completed': this.props.isCompleted,
+      'editing': this.props.isEditing
+    });
     return (
-      <li className="todo">
+      <li className={itemClass}>
         <div className="view">
           <input type="checkbox"
-                 className="toggle" />
-          <label htmlFor="todo">
+                 className="toggle" 
+                 defaultChecked={this.props.isCompleted}
+                 onClick={ () => this.props.toggleComplete(this.props.id) }/>
+          <label htmlFor="todo"
+                 ref="text"
+                 onDoubleClick={ () => this.props.editItem(this.props.id) }>
             {this.props.text}
           </label>
-          <button className="destroy"></button>
+          <button className="destroy"
+                  onClick={ () => this.props.deleteItem(this.props.id) }>
+          </button>
         </div>
-        <TextInput />
+        <TextInput text={this.props.text}
+                   itemId={this.props.id}
+                   cancelEditing={this.props.cancelEditing}
+                   doneEditing={this.props.doneEditng} />
       </li>
     );
   }
