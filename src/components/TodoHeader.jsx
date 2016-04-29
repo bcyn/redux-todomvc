@@ -7,6 +7,13 @@ export default class TodoHeader extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
+  _handleKeyPress(e) {
+    if (e.key === 'Enter' && this.refs.addTodoInput.value !== '') {
+      const itemText = this.refs.addTodoInput.value;
+      this.refs.addTodoInput.value = '';
+      return this.props.addItem(itemText);
+    }
+  }
   render() {
     return (
       <header className="header">
@@ -16,7 +23,7 @@ export default class TodoHeader extends Component {
                autofocus
                autoComplete="off"
                placeholder="What needs to be done?" 
-               onKeyPress={ () => this.props.addItem(this.refs.addTodoInput.value) }/>
+               onKeyPress={this._handleKeyPress.bind(this)}/>
       </header>
     );
   }

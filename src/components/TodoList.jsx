@@ -31,6 +31,8 @@ export default class TodoList extends Component {
                       id={item.get('id')}
                       isCompleted={this.isCompleted(item)}
                       isEditing={item.get('editing')} 
+                      doneEditing={this.props.doneEditing}
+                      cancelEditing={this.props.cancelEditing}
                       toggleComplete={this.props.toggleComplete}
                       deleteItem={this.props.deleteItem}
                       editItem={this.props.editItem} />

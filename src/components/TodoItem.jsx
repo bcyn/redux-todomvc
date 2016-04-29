@@ -34,7 +34,7 @@ export default class TodoItem extends Component {
         <TextInput text={this.props.text}
                    itemId={this.props.id}
                    cancelEditing={this.props.cancelEditing}
-                   doneEditing={this.props.doneEditng} />
+                   doneEditing={this.props.doneEditing} />
       </li>
     );
   }
